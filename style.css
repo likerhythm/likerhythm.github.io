@@ -47,7 +47,10 @@ body {
   padding: 20px;
   margin-right: 400px;
   background-color: #fcfcfc;
+  padding-left: 5rem;
+  padding-top: 100rem;
 }
+
 
 .side-header {
   position: fixed;
