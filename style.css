@@ -1,101 +1,117 @@
-/* 색상/타이포 변수 */
 :root {
-  --main-bg: #2c3e50;      /* 네이비 */
-  --main-text: #ecf0f1;    /* 밝은 회색 */
-  --accent: #27ae60;       /* 포인트 그린 */
-  --accent-hover: #219150; /* 포인트 그린 hover */
-  --section-bg: #ffffff;   /* 기본 섹션 배경 */
-  --section-alt-bg: #f7f9fb; /* 대체 섹션 배경 (약한 회색/블루톤) */
-  --title-color: #2b3a42;  /* 제목 텍스트 */
+  --bs-primary: #035E41;
+  --bs-dark: #035E41;
 }
 
-/* 네비게이션 */
-.main-nav {
-  background-color: var(--main-bg);
+header.bg-primary {
+  background-color: #035E41 !important;
+  color: #ecf0f1;
 }
 
-/* Hero */
-.hero {
-  background-color: var(--main-bg);
-  color: var(--main-text);
+footer.bg-dark {
+  background-color: #035E41 !important;
+  color: #ecf0f1;
 }
 
-/* 섹션 공통 */
-.section {
-  padding: 64px 0;
-  background-color: var(--section-bg);
+#projects .col-md-4 {
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
 }
 
-.section-alt {
-  background-color: var(--section-alt-bg);
+#projects .row {
+  row-gap: 16px;
 }
 
-.section-title {
+#projects .card-body {
+  padding: 16px 20px;
+}
+
+#projects .card-title {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2b3a42;
+}
+
+#projects .card-text {
+  color: #6b7280;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  line-height: 1.6;
+  color: #212529;    
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  margin-right: 400px;
+  background-color: #fcfcfc;
+}
+
+.side-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100vh;
+  background-color: #2f2f2f;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.side-header-box {
+  transform: translateY(-10%);
+}
+
+
+.side-header .btn {
+  width: 100%;
   text-align: center;
-  margin-bottom: 24px;
-  color: var(--title-color);
-  font-weight: 700;
 }
 
-.section-desc {
-  max-width: 720px;
-  margin: 0 auto;
+.project-item {
+  padding: 16px 24px;   
+  border-bottom: 1px solid #ddd;
 }
 
-/* 버튼 */
-.btn-accent {
-  background-color: var(--accent);
-  color: #fff;
-  border: none;
-}
-.btn-accent:hover,
-.btn-accent:focus {
-  background-color: var(--accent-hover);
-  color: #fff;
+.project-item:last-child {
+  border-bottom: none;
 }
 
-/* 프로젝트 카드 */
-.project-card .card-title {
-  font-weight: 600;
+.project-thumb {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
 }
 
-/* 스킬 뱃지 */
-.skill-badge {
-  display: inline-block;
-  padding: 10px 14px;
-  border-radius: 999px;
-  background: #eef3f6;
-  font-weight: 600;
+@media (max-width: 576px) {
+  .project-item.d-flex { flex-direction: column; }
+  .project-thumb { width: 100%; height: 200px; }
 }
 
-/* 푸터 */
-.footer {
-  background-color: var(--main-bg);
-  color: var(--main-text);
+.profile-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
 }
 
-/* 가독성 향상: 링크 컬러 */
-a {
-  color: #2d7d9a;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
+.profile-image-box {
+    margin: 0 auto 60px;
 }
 
-/* 시스템 다크모드 대응 (선택사항) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --section-bg: #121417;
-    --section-alt-bg: #171a1e;
-    --title-color: #e6edf3;
-  }
-  body {
-    color: #e6edf3;
-    background: #0e1114;
-  }
-  .skill-badge {
-    background: #20262c;
-  }
-  a { color: #6ab0c9; }
+.skills-grid {
+  max-width: 700px;
+  margin-left: 0;
+}
+
+@media (max-width: 576px) {
+  .skills-grid { max-width: 100%; }
 }
