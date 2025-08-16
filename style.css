@@ -1,0 +1,101 @@
+/* 색상/타이포 변수 */
+:root {
+  --main-bg: #2c3e50;      /* 네이비 */
+  --main-text: #ecf0f1;    /* 밝은 회색 */
+  --accent: #27ae60;       /* 포인트 그린 */
+  --accent-hover: #219150; /* 포인트 그린 hover */
+  --section-bg: #ffffff;   /* 기본 섹션 배경 */
+  --section-alt-bg: #f7f9fb; /* 대체 섹션 배경 (약한 회색/블루톤) */
+  --title-color: #2b3a42;  /* 제목 텍스트 */
+}
+
+/* 네비게이션 */
+.main-nav {
+  background-color: var(--main-bg);
+}
+
+/* Hero */
+.hero {
+  background-color: var(--main-bg);
+  color: var(--main-text);
+}
+
+/* 섹션 공통 */
+.section {
+  padding: 64px 0;
+  background-color: var(--section-bg);
+}
+
+.section-alt {
+  background-color: var(--section-alt-bg);
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--title-color);
+  font-weight: 700;
+}
+
+.section-desc {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* 버튼 */
+.btn-accent {
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+}
+.btn-accent:hover,
+.btn-accent:focus {
+  background-color: var(--accent-hover);
+  color: #fff;
+}
+
+/* 프로젝트 카드 */
+.project-card .card-title {
+  font-weight: 600;
+}
+
+/* 스킬 뱃지 */
+.skill-badge {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #eef3f6;
+  font-weight: 600;
+}
+
+/* 푸터 */
+.footer {
+  background-color: var(--main-bg);
+  color: var(--main-text);
+}
+
+/* 가독성 향상: 링크 컬러 */
+a {
+  color: #2d7d9a;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* 시스템 다크모드 대응 (선택사항) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --section-bg: #121417;
+    --section-alt-bg: #171a1e;
+    --title-color: #e6edf3;
+  }
+  body {
+    color: #e6edf3;
+    background: #0e1114;
+  }
+  .skill-badge {
+    background: #20262c;
+  }
+  a { color: #6ab0c9; }
+}
