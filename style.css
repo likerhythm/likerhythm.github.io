@@ -119,3 +119,27 @@ body {
 @media (max-width: 576px) {
   .skills-grid { max-width: 100%; }
 }
+
+/* 태블릿 이하: 사이드바 조금 줄이기 */
+@media (max-width: 992px) {
+  .side-header { width: 20rem; }
+  .main-content { margin-right: 20rem; padding-left: 4rem; }
+}
+
+/* 모바일: 사이드바를 상단으로 전환, 메인 여백 제거 */
+@media (max-width: 576px) {
+  .side-header {
+    position: static;   /* fixed 해제해서 문서 흐름으로 */
+    width: 100%;
+    height: auto;
+    padding: 16px;
+  }
+  .side-header-box {
+    transform: none;    /* 위로 당기던 변환 해제 */
+  }
+  .main-content {
+    margin-right: 0;    /* 사이드바 폭만큼 밀던 것 제거 */
+    padding: 16px;      /* 좌우 여백만 간단히 */
+    padding-top: 24px;
+  }
+}
