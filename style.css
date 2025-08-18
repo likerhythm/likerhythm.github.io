@@ -13,26 +13,26 @@ footer.bg-dark {
   color: #ecf0f1;
 }
 
-#projects .col-md-4 {
+#mainprojects .col-md-4 {
   flex: 0 0 100% !important;
   max-width: 100% !important;
 }
 
-#projects .row {
+#mainprojects .row {
   row-gap: 16px;
 }
 
-#projects .card-body {
+#mainprojects .card-body {
   padding: 16px 20px;
 }
 
-#projects .card-title {
+#mainprojects .card-title {
   margin-bottom: 8px;
   font-weight: 600;
   color: #2b3a42;
 }
 
-#projects .card-text {
+#mainprojects .card-text {
   color: #6b7280;
 }
 
@@ -71,9 +71,9 @@ h1, h2, h3 {
   padding: 20px;
 }
 
-.side-header-box {
+/* .side-header-box {
   transform: translateY(-10%);
-}
+} */
 
 
 .side-header .btn {
@@ -118,6 +118,12 @@ h1, h2, h3 {
 .skills-grid {
   max-width: 700px;
   margin-left: 0;
+}
+
+.skills-box .skills-line {
+  font-size: 1rem;
+  margin: 0 0 1.2rem;
+  max-width: 560px;
 }
 
 @media (max-width: 576px) {
