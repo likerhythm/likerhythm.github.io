@@ -85,9 +85,20 @@ h1, h2, h3 {
   border-bottom: none;
 }
 
+.project-content {
+  max-width: 700px;   /* 원하는 최대 가로폭 */
+  margin: 0;     /* 가운데 정렬 */
+}
+
+.highlight-title {
+  color: #495057;   /* Bootstrap의 회색 700 정도 */
+  font-weight: 600; /* 세미볼드 */
+}
+
 .project-thumb {
   width: 100px;
   height: 100px;
+  aspect-ratio:1 / 1;
   object-fit: cover;
   border-radius: 8px;
   flex-shrink: 0;

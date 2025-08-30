@@ -99,24 +99,64 @@
       <div class="container">
         <h1 class="mb-4 display-4 fw-normal lh-1">Main Projects</h1>
         <div class="project-item d-flex gap-5 mb-5">
-          <img src="image/dummy.png" alt="프로젝트 1 사진" class="project-thumb img-fluid mb-2" loading="lazy" style="max-width: 220px; height:auto;">
-          <div>
-            <h3 class="mb-4 fw-normal">프로젝트 1</h3>
-            <p>프로젝트 설명</p>
-          </div>
-        </div>
-        <div class="project-item d-flex gap-5 mb-5">
-          <img src="image/dummy.png" alt="프로젝트 1 사진" class="project-thumb img-fluid mb-2" loading="lazy" style="max-width: 220px; height:auto;">
-          <div>
-            <h3 class="mb-4 fw-normal">프로젝트 2</h3>
-            <p>프로젝트 설명</p>
-          </div>
-        </div>
-        <div class="project-item d-flex gap-5">
-          <img src="image/dummy.png" alt="프로젝트 1 사진" class="project-thumb img-fluid mb-2" loading="lazy" style="max-width: 220px; height:auto;">
-          <div>
-            <h3 class="mb-4 fw-normal">프로젝트 3</h3>
-            <p>프로젝트 설명</p>
+          <img src="image/dummy.png" alt="프로젝트 1 사진" class="project-thumb img-fluid mb-2" loading="lazy" style="max-width: 220px; max-height: 220px;">
+          <div class="project-content">
+            <h3 class="mb-4 fw-normal">리드미</h3>
+            <p>
+              넘치는 OTT 컨텐츠 속에서 사용자가 그때그때 원하는 작품을 찾을 수 있도록 
+              사용자의 실시간 행동(클릭, 리뷰, 좋아요 등)을 기반으로 컨텐츠를 추천하는 서비스.
+            </p>
+            <p>GitHub: <a href="https://github.com/Ureka-High-Five">https://github.com/Ureka-High-Five</a></p>
+
+            <!-- 문제 해결 사례 섹션 추가 -->
+            <h5 class="mt-5 fw-semibold">AWS Lambda와 S3 기반 포스터 리사이징 파이프라인 구축</h5>
+            <ul>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">문제 상황:</span> 신규 OTT 콘텐츠가 추가될 때마다 썸네일용 포스터를 생성하기 위해 이미지를 매번 리사이징해야 하는 번거로움이 존재.</li>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">해결 방안 검토</span></li>
+              <ul>
+                <li class="mb-2"> <span class="highlight-title fw-semibold">서버 직접 처리:</span> 콘텐츠 등록 시 서버에서 즉시 이미지를 리사이징하는 방식. 그러나 서버 리소스를 과도하게 소모하여 확장성 측면에서 적합하지 않다고 판단.</li>
+                <li class="mb-2"> <span class="highlight-title fw-semibold">AWS Lambda 활용:</span> S3에 콘텐츠 포스터가 업로드되면 이벤트 트리거를 통해 Lambda 함수가 실행되어 이미지를 자동으로 리사이징. 호출 횟수 기반 과금 모델이지만, 콘텐츠 추가 빈도가 높지 않다고 판단하여 이 방식을 채택.</li>
+              </ul>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">해결:</span> S3 업로드 이벤트를 기반으로 Lambda가 자동으로 실행되어, 서버 부하 없이 포스터 리사이징을 수행하는 파이프라인을 구축하여 해결</li>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">성과:</span> 서버 리소스를 점유하지 않고 독립적인 서버리스 환경에서 이미지 리사이징을 자동화하여 운영 효율성과 확장성을 확보.</li>
+            </ul>
+
+            <h5 class="mt-5 fw-semibold">실시간 행동 반영을 위한 아키텍처 설계로 성능 70% 개선</h5>
+            <ul>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">문제 상황:</span> 부하 테스트(10초간 1000회 요청) 결과, 사용자 행동 처리 API 응답 시간이 평균 2.4초로 지연됨</li>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">원인:</span> 사용자 행동 처리 시 DB 업데이트, 사용자 가중치 및 벡터 업데이트가 모두 동기적으로 수행되어 응답 지연.</li>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">해결 방안 검토</li>
+              <ul>
+                <li class="mb-2"> <span class="highlight-title fw-semibold">서버 분리:</span> 사용자 가중치 및 벡터 업데이트를 별도의 FastAPI 서버에서 처리하도록 하여 서버의 부하 절감</li>
+                <li class="mb-2"> <span class="highlight-title fw-semibold">서버 통신:</span> Spring 서버와 FastAPI 서버 간의 통신은 RabbitMQ를 사용하여 비동기적으로 이루어지도록 하여 행동 처리로 인한 응답 지연 최소화</li>
+                <li class="mb-2"> <span class="highlight-title fw-semibold">사용자 가중치 DB 분리:</span> 업데이트가 빈번하게 일어나는 사용자 가중치 DB를 분리하여 DB로 인한 API 응답 지연 시간 절감</li>
+                <li class="mb-2"> <span class="highlight-title fw-semibold">사용자 벡터를 Redis에 캐싱:</span> 사용자 벡터는 추천이 일어날 때만 필요하므로 Write Back 전략을 사용하여 Redis에 캐싱해 놓고 추천이 일어날 때 PostgreSQL에 동기화하는 방식으로 DB 부하 절감</li>
+              </ul>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">해결:</span> 위 대안들을 종합적으로 적용하여 실시간 행동 반영 아키텍처를 설계하고 문제 해결</li>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">성과:</span> 응답 시간이 2.4초에서 743ms로 약 70% 감소하여 사용자 경험 향상 기대</li>
+            </ul>
+
+            <h5 class="mt-5 fw-semibold">재시도와 로그를 활용한 분산 서버 트랜잭션 관리</h5>
+            <ul>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">문제 상황:</span> 하나의 요청이 여러 서버에서 순차적으로 처리될 때 예외 발생 시 일관성이 깨져서 요청이 무시되는 문제</li>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">원인:</span> 예외 발생 시 이를 재처리하지 않음.</li>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">해결 방안 검토</li>
+              <ul>
+                <li class="mb-2"> <span class="highlight-title fw-semibold">재시도 전략 구축:</span> 예외 발생 시 이를 재시도하고 재시도 실패 시 이를 로그로 저장.</li>
+                <li class="mb-2"> <span class="highlight-title fw-semibold">Saga 패턴 도입:</span> Saga 패턴은 재시도가 아닌 롤백을 하는 패턴이기 때문에 적합하지 않다고 판단</li>
+              </ul>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">해결:</span> 예외 발생 시 3회 재시도 하고 모든 재시도가 실패하면 예외 내용을 MongoDB에 로그로 저장. 주기적으로 로그를 기반으로 재처리하는 스케줄러를 사용하여 예외가 발생한 요청 재시도. 스케줄러도 실패 시 예외를 파일로 저장하여 수동으로 처리하도록 설계.</li>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">성과:</span> 사용자의 실시간 행동 처리 중 예외가 발생하더라도 이를 재처리할 수 있기 때문에 사용자의 행동이 모두 시스템에 반영됨을 보장할 수 있음.</li>
+            </ul>
+
+            <h5 class="mt-5 fw-semibold">단일 몽고DB에서 발생할 수 있는 동시성 문제 해결</h5>
+            <ul>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">문제 상황:</span> MongoDB에 저장된 사용자 가중치 데이터를 동시에 업데이트 하는 경우 가중치 값이 덮어 씌워지는 문제.</li>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">원인:</span> API 호출 시 inc 연산자 사용하여 업데이트, 스케줄러 동작 시 set 연산자 사용하여 업데이트</li>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">해결 방안 검토:</span> MongoDB의 공식 문서를 참고하여 동시성 문제가 발생할 수 있는 경우 검토. 검토 결과 MongoDB의 set 연산자는 값을 덮어 씌우는 연산이고 inc 연산자는 값을 더하거나 빼는 연산이기 때문에 inc 연산자만 사용하면 동시성 문제 발생하지 않음</li>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">해결:</span> 스케줄러가 set 연산자 대신에 inc 연산자를 사용하도록 수정</li>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">MongoDB에 저장된 사용자 가중치가 안정적으로 업데이트 됨을 보장할 수 있음.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -155,16 +195,17 @@
             <div class="text-muted small mt-3">2025.01 ~ 2025.08</div>
           </dt>
           <dd class="col-12 col-md-9">
-            <p class="mb-2">상세 설명 한 줄 요약을 적습니다.</p>
-            <ul class="mb-0 list-unstyled">
-              <li>역할/성과 1</li>
-              <li>역할/성과 2</li>
+            <p class="mb-2"></p>
+            <ul class="mb-0">
+              <li>Java, Spring, MySQL 학습 및 팀 프로젝트 진행</li>
+              <li>요금제 추천 <strong>AICC</strong> 프로젝트 수행</li>
+              <li>'리드미' 최종 프로젝트 수행, <strong>최우수상</strong> 수상</li>
             </ul>
           </dd>
           <div class="col-12"><hr class="my-4"></div>
           <dt class="col-12 col-md-3 h5 fw-normal mb-1">
-            활동 이름
-            <div class="text-muted small mt-3">YYYY.MM ~ now</div>
+            공개SW 개선
+            <div class="text-muted small mt-3">2023.MM ~ now</div>
           </dt>
           <dd class="col-12 col-md-9">
             <p class="mb-2">상세 설명 한 줄 요약.</p>
