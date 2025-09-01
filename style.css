@@ -86,13 +86,13 @@ h1, h2, h3 {
 }
 
 .project-content {
-  max-width: 700px;   /* 원하는 최대 가로폭 */
-  margin: 0;     /* 가운데 정렬 */
+  max-width: 700px;
+  margin: 0;
 }
 
 .highlight-title {
-  color: #495057;   /* Bootstrap의 회색 700 정도 */
-  font-weight: 600; /* 세미볼드 */
+  color: #495057;
+  font-weight: 600;
 }
 
 .project-thumb {
@@ -136,22 +136,20 @@ h1, h2, h3 {
   .skills-grid { max-width: 100%; }
 }
 
-/* 태블릿 이하: 사이드바 조금 줄이기 */
 @media (max-width: 992px) {
   .side-header { width: 20rem; }
   .main-content { margin-right: 20rem; padding-left: 4rem; }
 }
 
-/* 모바일: 사이드바를 상단으로 전환, 메인 여백 제거 */
 @media (max-width: 576px) {
   .side-header {
-    position: static;   /* fixed 해제해서 문서 흐름으로 */
+    position: static;
     width: 100%;
     height: auto;
     padding: 16px;
   }
   .side-header-box {
-    transform: none;    /* 위로 당기던 변환 해제 */
+    transform: none;
   }
   .main-content {
     margin-right: 0;    /* 사이드바 폭만큼 밀던 것 제거 */
