@@ -94,20 +94,7 @@
             </p>
             <p><a href="https://github.com/Ureka-High-Five">GitHub</a></p>
 
-            <!-- 문제 해결 사례 섹션 추가 -->
-            <h5 class="mt-5 fw-semibold">AWS Lambda와 S3 기반 포스터 리사이징 파이프라인 구축</h5>
-            <ul>
-              <li class="mb-2"> <span class="highlight-title fw-semibold">문제 상황:</span> 신규 OTT 콘텐츠가 추가될 때마다 썸네일용 포스터를 생성하기 위해 이미지를 매번 리사이징해야 하는 번거로움이 존재.</li>
-              <li class="mb-2"> <span class="highlight-title fw-semibold">해결 방안 검토</span></li>
-              <ul>
-                <li class="mb-2"> <span class="highlight-title fw-semibold">서버 직접 처리:</span> 콘텐츠 등록 시 서버에서 즉시 이미지를 리사이징하는 방식. 그러나 서버 리소스를 과도하게 소모하여 확장성 측면에서 적합하지 않다고 판단.</li>
-                <li class="mb-2"> <span class="highlight-title fw-semibold">AWS Lambda 활용:</span> S3에 콘텐츠 포스터가 업로드되면 이벤트 트리거를 통해 Lambda 함수가 실행되어 이미지를 자동으로 리사이징. 호출 횟수 기반 과금 모델이지만, 콘텐츠 추가 빈도가 높지 않다고 판단하여 이 방식을 채택.</li>
-              </ul>
-              <li class="mb-2"> <span class="highlight-title fw-semibold">해결:</span> S3 업로드 이벤트를 기반으로 Lambda가 자동으로 실행되어, 서버 부하 없이 포스터 리사이징을 수행하는 파이프라인을 구축하여 해결</li>
-              <li class="mb-2"> <span class="highlight-title fw-semibold">성과:</span> 서버 리소스를 점유하지 않고 독립적인 서버리스 환경에서 이미지 리사이징을 자동화하여 운영 효율성과 확장성을 확보.</li>
-            </ul>
-
-            <h5 class="mt-5 fw-semibold">실시간 행동 반영을 위한 아키텍처 설계로 성능 70% 개선</h5>
+            <h5 class="mt-5 fs-4 fw-semibold">실시간 행동 반영을 위한 아키텍처 설계로 성능 70% 개선</h5>
             <ul>
               <li class="mb-2"> <span class="highlight-title fw-semibold">문제 상황:</span> 부하 테스트(10초간 1000회 요청) 결과, 사용자 행동 처리 API 응답 시간이 평균 2.4초로 지연됨</li>
               <li class="mb-2"> <span class="highlight-title fw-semibold">원인:</span> 사용자 행동 처리 시 DB 업데이트, 사용자 가중치 및 벡터 업데이트가 모두 동기적으로 수행되어 응답 지연.</li>
@@ -119,10 +106,10 @@
                 <li class="mb-2"> <span class="highlight-title fw-semibold">사용자 벡터를 Redis에 캐싱:</span> 사용자 벡터는 추천이 일어날 때만 필요하므로 Write Back 전략을 사용하여 Redis에 캐싱해 놓고 추천이 일어날 때 PostgreSQL에 동기화하는 방식으로 DB 부하 절감</li>
               </ul>
               <li class="mb-2"> <span class="highlight-title fw-semibold">해결:</span> 위 대안들을 종합적으로 적용하여 실시간 행동 반영 아키텍처를 설계하고 문제 해결</li>
-              <li class="mb-2"> <span class="highlight-title fw-semibold">성과:</span> 응답 시간이 2.4초에서 743ms로 약 70% 감소하여 사용자 경험 향상 기대</li>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">성과:</span> 응답 시간이   2.4초에서 743ms로 약 70% 감소</li>
             </ul>
 
-            <h5 class="mt-5 fw-semibold">재시도와 로그를 활용한 분산 서버 트랜잭션 관리</h5>
+            <h5 class="mt-5 fs-4 fw-semibold">재시도와 로그를 활용한 분산 서버 트랜잭션 관리</h5>
             <ul>
               <li class="mb-2"> <span class="highlight-title fw-semibold">문제 상황:</span> 하나의 요청이 여러 서버에서 순차적으로 처리될 때 예외 발생 시 일관성이 깨져서 요청이 무시되는 문제</li>
               <li class="mb-2"> <span class="highlight-title fw-semibold">원인:</span> 예외 발생 시 이를 재처리하지 않음.</li>
@@ -134,8 +121,20 @@
               <li class="mb-2"> <span class="highlight-title fw-semibold">해결:</span> 예외 발생 시 3회 재시도 하고 모든 재시도가 실패하면 예외 내용을 MongoDB에 로그로 저장. 주기적으로 로그를 기반으로 재처리하는 스케줄러를 사용하여 예외가 발생한 요청 재시도. 스케줄러도 실패 시 예외를 파일로 저장하여 수동으로 처리하도록 설계.</li>
               <li class="mb-2"> <span class="highlight-title fw-semibold">성과:</span> 사용자의 실시간 행동 처리 중 예외가 발생하더라도 이를 재처리할 수 있기 때문에 사용자의 행동이 모두 시스템에 반영됨을 보장할 수 있음.</li>
             </ul>
+            
+            <h5 class="mt-5 fs-4 fw-semibold">AWS Lambda와 S3 기반 포스터 리사이징 파이프라인 구축</h5>
+            <ul>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">문제 상황:</span> 신규 OTT 콘텐츠가 추가될 때마다 썸네일용 포스터를 생성하기 위해 이미지를 매번 리사이징해야 하는 번거로움이 존재.</li>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">해결 방안 검토</span></li>
+              <ul>
+                <li class="mb-2"> <span class="highlight-title fw-semibold">서버 직접 처리:</span> 콘텐츠 등록 시 서버에서 즉시 이미지를 리사이징하는 방식. 그러나 서버 리소스를 과도하게 소모하여 확장성 측면에서 적합하지 않다고 판단.</li>
+                <li class="mb-2"> <span class="highlight-title fw-semibold">AWS Lambda 활용:</span> S3에 콘텐츠 포스터가 업로드되면 이벤트 트리거를 통해 Lambda 함수가 실행되어 이미지를 자동으로 리사이징. 호출 횟수 기반 과금 모델이지만, 콘텐츠 추가 빈도가 높지 않다고 판단하여 이 방식을 채택.</li>
+              </ul>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">해결:</span> S3 업로드 이벤트를 기반으로 Lambda가 자동으로 실행되어, 서버 부하 없이 포스터 리사이징을 수행하는 파이프라인을 구축하여 해결</li>
+              <li class="mb-2"> <span class="highlight-title fw-semibold">성과:</span> 서버 리소스를 점유하지 않고 독립적인 서버리스 환경에서 이미지 리사이징을 자동화하여 운영 효율성과 확장성을 확보.</li>
+            </ul>
 
-            <h5 class="mt-5 fw-semibold">단일 몽고DB에서 발생할 수 있는 동시성 문제 해결</h5>
+            <h5 class="mt-5 fs-4 fw-semibold">단일 몽고DB에서 발생할 수 있는 동시성 문제 해결</h5>
             <ul>
               <li class="mb-2"> <span class="highlight-title fw-semibold">문제 상황:</span> MongoDB에 저장된 사용자 가중치 데이터를 동시에 업데이트 하는 경우 가중치 값이 덮어 씌워지는 문제.</li>
               <li class="mb-2"> <span class="highlight-title fw-semibold">원인:</span> API 호출 시 inc 연산자 사용하여 업데이트, 스케줄러 동작 시 set 연산자 사용하여 업데이트</li>
@@ -162,7 +161,7 @@
                 GitHub
               </a>
             </div>
-            <p class="mb-0">LGU+ 요금제 챗봇 기반 AICC 개발</p>
+            <p class="mb-0">챗봇 기반 LGU+ 요금제 추천 AICC 개발</p>
             <ul class="mb-0 list-unstyled">
               <li><span class="highlight-title fw-semibold">역할</span>: 프롬프팅, 아키텍처 설계</li>
             </ul>
@@ -180,12 +179,12 @@
                 GitHub
               </a>
             </div>
-            <p class="mb-0">외부 프로젝트의 '만남 장소 선정' 기능의 문제점을 파악하고 개선</p>
+            <p class="mb-0">Open Source 프로젝트 'Almost There'의 '만남 장소 선정' 기능의 문제점을 파악하고 개선</p>
             <ul class="mb-0 list-unstyled">
-              <li><span class="highlight-title fw-semibold">역할</span>: 기존 문제점 파악, 알고리즘 설계</li>
+              <li><span class="highlight-title fw-semibold">역할</span>: 기존 문제점 파악 및 해결 방법 고안, 알고리즘 설계</li>
               <li><span class="highlight-title fw-semibold">성과</span></li>
               <ul>
-                <li><span>만남 장소까지의 이동 시간 개선 - 사용자별 편차 47% 개선, 이동 시간 5 % 개선</span></li>
+                <li><span>만남 장소까지의 이동 시간 개선 - 사용자별 편차 47% 감소, 총 이동 시간 5 % 감소</span></li>
                 <li><span>기술은 문제 해결을 위한 많은 수단 중 하나임을 깨닫게 된 계기</span></li>
               </ul>
             </ul>
